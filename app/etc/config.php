@@ -11,6 +11,7 @@ return [
         'Magento_Indexer' => 1,
         'Learning_HelloPage' => 1,
         'Learning_HelloWorld' => 1,
+        'Learning_OrmDb' => 1,
         'Learning_PluginDemo' => 1,
         'Magento_Config' => 1,
         'Magento_User' => 1,
