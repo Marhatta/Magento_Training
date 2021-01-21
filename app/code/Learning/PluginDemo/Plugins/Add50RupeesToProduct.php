@@ -8,6 +8,6 @@ class Add50RupeesToProduct {
     {
         $productInfo['price'] += 50;
 
-        return array($productInfo,$requestInfo);
+        //return array($productInfo,$requestInfo);
     }
 }

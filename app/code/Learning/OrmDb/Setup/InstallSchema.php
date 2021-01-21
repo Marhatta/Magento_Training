@@ -51,6 +51,16 @@ class InstallSchema implements InstallSchemaInterface
                     'Email'
                 )
                 ->addColumn(
+                    'contact',
+                    Table::TYPE_TEXT,
+                    null,
+                    [
+                        'nullable' => false,
+                        'default' => ''
+                    ],
+                    'Contact'
+                )
+                ->addColumn(
                     'description',
                     Table::TYPE_TEXT,
                     null,

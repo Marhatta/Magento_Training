@@ -32,13 +32,14 @@ class Index extends \Magento\Framework\App\Action\Action
             $name        = $post['name'];
             $email       = $post['email'];
             $description = $post['description'];
+            $contact     = $post['contact'];
 
             // Redirect to the form
             $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
             $resultRedirect->setUrl('/learning_ormdb/contactus/index');
 
             //check if all the fields are filled
-            if(!$name || !$email || !$description){
+            if(!$name || !$email || !$description || !$contact){
                 $this->messageManager->addErrorMessage('Please fill all the details');
                 return $resultRedirect;
             }
@@ -46,7 +47,8 @@ class Index extends \Magento\Framework\App\Action\Action
             $data = [
 				'name'         => $name,
 				'email'        => $email,
-				'description'  => $description
+                'description'  => $description,
+                'contact'      => $contact
 			];
             $contactContent = $this->_contactUsFactory->create();
 			$contactContent->addData($data)->save();
