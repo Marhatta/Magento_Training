@@ -3,22 +3,22 @@
 namespace Learning\OrmDb\Controller\ContactUs;
 
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Exception;
 
 class Index extends \Magento\Framework\App\Action\Action
 {
 
-    protected $_pageFactory;
-
-	protected $_contactUsFactory;
+    protected $_contactModel;
+	protected $_contactResourceModel;
 
 	public function __construct(
 		\Magento\Framework\App\Action\Context $context,
-		\Magento\Framework\View\Result\PageFactory $pageFactory,
-		\Learning\OrmDb\Model\ContactUsFactory $contactUsFactory
-		)
+        \Learning\OrmDb\Model\ContactUs $contactModel,
+        \Learning\OrmDb\Model\ResourceModel\ContactUs $contactResourceModel
+    )
 	{
-		$this->_pageFactory = $pageFactory;
-		$this->_contactUsFactory = $contactUsFactory;
+        $this->_contactModel = $contactModel;
+		$this->_contactResourceModel = $contactResourceModel;
 		return parent::__construct($context);
     }
     
@@ -26,7 +26,6 @@ class Index extends \Magento\Framework\App\Action\Action
     {
         // 1. POST request : Get contact info
         $post = (array) $this->getRequest()->getPost();
-
         if (!empty($post)) {
             // Retrieve your form data
             $name        = $post['name'];
@@ -43,15 +42,14 @@ class Index extends \Magento\Framework\App\Action\Action
                 $this->messageManager->addErrorMessage('Please fill all the details');
                 return $resultRedirect;
             }
-            //Save contents in database
-            $data = [
-				'name'         => $name,
-				'email'        => $email,
-                'description'  => $description,
-                'contact'      => $contact
-			];
-            $contactContent = $this->_contactUsFactory->create();
-			$contactContent->addData($data)->save();
+
+            $data = $this->_contactModel->setData($post);
+
+            try {
+                $this->_contactResourceModel->save($data);
+            } catch(\Exception $e){
+                $this->messageManager->addErrorMessage('Something went wrong');
+            }
 
             // Display the succes form validation message
             $this->messageManager->addSuccessMessage('Your request has been sent successfully');

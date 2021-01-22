@@ -2,19 +2,24 @@
 
 namespace Learning\OrmDb\Block;
 
+use Learning\OrmDb\Model\ResourceModel\ContactUs\Collection;
 class ContactUs extends \Magento\Framework\View\Element\Template
 {
+    private $collection;
     /**
      * Construct
      *
      * @param \Magento\Framework\View\Element\Template\Context $context
+     * @param Collection $collection
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
+        Collection $collection,
         array $data = []
     )
     {
+        $this->collection =  $collection;
         parent::__construct($context, $data);
        }
 
@@ -26,5 +31,9 @@ class ContactUs extends \Magento\Framework\View\Element\Template
     public function getFormAction()
     {
         return '/learning_ormdb/contactus/index';
+    }
+
+    public function getAllRequests(){
+        return $this->collection;
     }
 }

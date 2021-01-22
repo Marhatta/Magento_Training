@@ -1,7 +1,8 @@
 <h2>Contact Us</h2>
-
+<?php
+  $customer_requests = $block->getAllRequests();
+?>
 <form action="<?php echo $block->getFormAction() ?>" method="post">
-
   <label for="name">Full Name:</label><br>
   <input type="text" id="name" name="name"><br>
   <label for="email">Email</label><br>
@@ -12,3 +13,26 @@
   <textarea id="description" name="description" rows="4" cols="50"></textarea><br>
   <input type="submit" value="Send">
 </form>
+
+
+<h2>All Records</h2>
+<?php if(count($customer_requests) > 0 ): ?>
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Contact</th>
+      <th>Description</th>
+    </tr>
+    <?php foreach( $customer_requests as $customer): ?>
+      <tr>
+        <td><?= $customer->getName() ?></td>
+        <td><?= $customer->getEmail() ?></td>
+        <td><?= $customer->getContact() ?></td>
+        <td><?= $customer->getDescription() ?></td>
+      </tr>
+    <?php endforeach; ?>
+  </table>
+<?php else: ?>
+  <h3>No records found</h3>
+<?php endif; ?>
