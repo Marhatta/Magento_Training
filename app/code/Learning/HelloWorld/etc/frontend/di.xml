@@ -1,6 +1,0 @@
-<?xml version="1.0" ?>
-<config>
-    <type name="\Magento\Chekout\Model\Cart">
-      <plugin name="add50RupeesToProduct" type="\Learning\HelloWorld\plugins\Add50RupeesToProduct" sortOrder="1" disabled="false" />
-    </type>
-</config>
