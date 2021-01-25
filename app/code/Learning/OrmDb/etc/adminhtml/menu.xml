@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+         <add id="Learning_OrmDb::customerRequests" title="Customer Requests" module="Learning_OrmDb" sortOrder="51" resource="Learning_OrmDb::customerRequests"/>
+        <add id="Learning_OrmDb::allRequests" title="See all requests" module="Learning_OrmDb" sortOrder="10" action="learning_ormdb_menu/customerrequests" resource="Learning_OrmDb::allRequests" parent="Learning_OrmDb::customerRequests"/>
+    </menu>
+</config>
